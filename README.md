@@ -5,7 +5,7 @@ This project is open sourced so feel free to fork a copy and edit the code and p
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. These instructions also help you to be able to understand how to run the program.
 
 ### Installing for Use
 
@@ -35,6 +35,24 @@ Clone the repository from the <a href="https://github.com/CThompson01/MetinFarm"
 Open project in <a href="https://www.eclipse.org/downloads/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/download/">IntelliJ</a>
 
 Run the class Main in MetinFarm/src/main/
+
+### Running the Jar File
+
+Open up a command prompt or terminal
+```
+For Windows go to the Start Menu
+Type Command Prompt
+Press Enter
+```
+Navigate to the directory of the Jar File
+```
+cd C:\Users\username\Desktop
+```
+Run the command to run a Jar File
+```
+java -jar MetinFarm.jar
+```
+
 
 ## Changelog
 * Version 0.1
