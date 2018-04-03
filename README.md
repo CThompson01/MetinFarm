@@ -45,3 +45,16 @@ Run the class Main in MetinFarm/src/main/
  * More crops
  * Save system
  * More advanced currency system
+ 
+## Authors
+
+* **Chase Thompson** - *Main Developer* - [CThompson01](https://github.com/CThompson01)
+
+See also the list of [contributors](https://github.com/CThompson01/MetinFarm/contributors) who participated in this project.
+
+
+## Acknowledgments
+
+* Inspired by Idle Farming on iPhone
+* [PurpleBooth](https://gist.github.com/PurpleBooth) for [README.md template](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
+* [Brandon](https://github.com/bqrichards) for emotional support
