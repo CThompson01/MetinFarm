@@ -1,13 +1,16 @@
 package crops;
 
 public class Crop {
-    public int timeToGrow;
-    public int finishTime;
-    public double cost;
-    public double profit;
+    int timeToGrow;
+    int finishTime;
+    double cost;
+    double profit;
     public String typeOfCrop;
 
-    // Harvests the current crop
+    /**
+     * Harvests the current crop
+     * @return Returns the amount of money made from the crop
+     */
     public double harvest() {
         System.out.println("Harvesting " + typeOfCrop + "...");
         return cost + profit;
@@ -31,7 +34,11 @@ public class Crop {
         System.out.println("Wait " + (finishTime - ((int)System.currentTimeMillis()/1000)) + " more seconds before harvesting.");
     }
 
-    public int setFinishTime() {
+    /**
+     * Calculates the time at which the crop will finish growing
+     * @return Returns an int holding the value of when the crop will be finished
+     */
+    int setFinishTime() {
         return (int)System.currentTimeMillis()/1000 + timeToGrow;
     }
 
