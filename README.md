@@ -55,6 +55,13 @@ java -jar MetinFarm.jar
 
 
 ## Changelog
+* Version 0.2
+  - Added a seperate command for harvesting
+  - Added a view plots command
+    - Shows which plots are harvestable
+  - Added currency system
+    - Buying crops now costs money
+    - Crop pricing available in the crops menu
 * Version 0.1
   - Set up initial engine
   - Add 2 crops and a loose monetary system
