@@ -36,7 +36,7 @@ Open project in <a href="https://www.eclipse.org/downloads/">Eclipse</a> or <a h
 
 Run the class Main in MetinFarm/src/main/
 
-### Running the Jar File
+### Running the Jar File (Windows)
 
 Open up a command prompt or terminal
 ```
@@ -47,6 +47,23 @@ Press Enter
 Navigate to the directory of the Jar File
 ```
 cd C:\Users\username\Desktop
+```
+Run the command to run a Jar File
+```
+java -jar MetinFarm.jar
+```
+
+
+### Running the Jar File (Linux)
+
+Open up a command prompt or terminal
+```
+Hold Ctrl + Alt + T
+```
+Navigate to the directory of the Jar File
+```
+If your version supports it right click on the .jar file
+Click "Open in Terminal"
 ```
 Run the command to run a Jar File
 ```
