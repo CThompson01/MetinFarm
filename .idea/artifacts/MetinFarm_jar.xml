@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MetinFarm:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MetinFarm_jar</output-path>
+    <root id="archive" name="MetinFarm.jar">
+      <element id="module-output" name="MetinFarm" />
+    </root>
+  </artifact>
+</component>

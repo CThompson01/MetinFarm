@@ -1,0 +1,11 @@
+money=2.5
+plot0=corn
+timeLeft0=26
+plot1=Empty Plot
+timeLeft1=-59
+plot2=Empty Plot
+timeLeft2=-59
+plot3=Empty Plot
+timeLeft3=-59
+plot4=Empty Plot
+timeLeft4=-7
