@@ -9,6 +9,6 @@ public class Corn extends Crop {
         cost = GameData.cornCost;
         profit = 0.50;
         typeOfCrop = "corn";
-        printTimeLeft();
+//        printTimeLeft();
     }
 }

@@ -9,6 +9,6 @@ public class Pumpkin extends Crop{
         cost = GameData.pumpkinCost;
         profit = 1.50;
         typeOfCrop = "pumpkin";
-        printTimeLeft();
+//        printTimeLeft();
     }
 }

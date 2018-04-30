@@ -6,6 +6,7 @@ public class Crop {
     double cost;
     double profit;
     public String typeOfCrop;
+    public String cropType;
 
     /**
      * Harvests the current crop
@@ -56,4 +57,10 @@ public class Crop {
     public int timeLeft() {
         return finishTime - (int)System.currentTimeMillis()/1000;
     }
+
+    /**
+     * Sets the time left for a crop to grow on the load of the game
+     * @param timeLeft The time left for the crop to grow once the game is loaded
+     */
+    public void loadTime(int timeLeft) { timeToGrow = timeLeft; }
 }

@@ -5,6 +5,9 @@ import crops.Empty;
 
 import java.util.Scanner;
 
+import static main.GameData.printHelp;
+import static main.Planting.plant;
+
 public class Main {
 
     // Variables needed for basic functionality
@@ -21,6 +24,13 @@ public class Main {
     public static void main(String[] args) {
         isRunning = true;
         input = new Scanner(System.in);
+
+        // Loads previously saved game data automatically
+        GameData.loadGame(player);
+
+        // Prints out a splash screen for new players
+        System.out.println("Welcome to MetinFarm v" + GameData.version + "\n" +
+                "If you are new to the game type \"help\"");
         while (isRunning) {
             System.out.print("> ");
             getCommand(input.nextLine());
@@ -39,7 +49,7 @@ public class Main {
         if (command.equalsIgnoreCase("exit") || command.equalsIgnoreCase("quit"))
             isRunning = false;
         else if (command.equalsIgnoreCase("save"))
-            System.out.println("Saving game...");
+            GameData.saveGame(player);
         else if (command.equalsIgnoreCase("help"))
             printHelp(GameData.helpText);
         else if (command.equalsIgnoreCase("crops"))
@@ -48,8 +58,12 @@ public class Main {
             System.out.println("Current Balance: $" + player.money);
 
         // Contains farming based commands
-        else if (command.contains("plant "))
+        else if (command.equalsIgnoreCase("plant"))
+            needCrop();
+        else if (command.contains("plant ")) {
             plantStuff(command.substring(6));
+            player.plots[player.selectedPlot].printTimeLeft();
+        }
         else if (command.contains("harvest"))
             plotStuff("harvest");
         else if (command.equalsIgnoreCase("plots ready"))
@@ -59,7 +73,7 @@ public class Main {
         else if (command.contains("plots "))
             plotStuff(command.substring(6));
         else if (command.equalsIgnoreCase("plots"))
-            printPlots();
+            printHarvestable();
         else
             System.out.println("That is not a command.\nTry typing \"help\" for a list of commands");
     }
@@ -69,7 +83,14 @@ public class Main {
      * @param crop The type of crop
      */
     private static void plantStuff(String crop) {
-        Planting.plant(crop, player);
+        plant(crop, player, true);
+    }
+
+    private static void needCrop() {
+        System.out.println("Please select a crop to plant");
+        printHelp(GameData.listOfCrops);
+        System.out.print("Crop > ");
+        plantStuff(input.nextLine());
     }
 
     /**
@@ -138,23 +159,16 @@ public class Main {
      * Prints a graphical view to show which plots are harvestable
      */
     private static void printHarvestable() {
+        int i = 0;
         for (Crop plot : player.plots) {
+            i++;
+            System.out.print("Plot " + i + ": ");
             if (plot.typeOfCrop.equalsIgnoreCase("Empty Plot"))
                 System.out.println("#   Empty Plot    #");
             else if (plot.harvestSuccess())
                 System.out.println("#   Harvestable   #");
             else
-                System.out.println("#   " + plot.timeLeft() + "s   #");
-        }
-    }
-
-    /**
-     * Prints out the specified help menu
-     * Used to print the main help, plot help and crops
-     */
-    private static void printHelp(String[] helpText) {
-        for (String aHelpText : helpText) {
-            System.out.println(aHelpText);
+                System.out.println("#   Crop: " + plot.typeOfCrop + "  Time Left: " + plot.timeLeft() + "s   #");
         }
     }
 }
