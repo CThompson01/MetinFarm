@@ -6,15 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="936e3ae7-68a1-46ac-9191-d07d80a83bb2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/crops/Corn.java" afterPath="$PROJECT_DIR$/src/crops/Corn.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/crops/Crop.java" afterPath="$PROJECT_DIR$/src/crops/Crop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/crops/Pumpkin.java" afterPath="$PROJECT_DIR$/src/crops/Pumpkin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/GameData.java" afterPath="$PROJECT_DIR$/src/main/GameData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Main.java" afterPath="$PROJECT_DIR$/src/main/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Planting.java" afterPath="$PROJECT_DIR$/src/main/Planting.java" />
-    </list>
+    <list default="true" id="936e3ae7-68a1-46ac-9191-d07d80a83bb2" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -118,7 +110,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="784" />
@@ -324,7 +316,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
