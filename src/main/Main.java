@@ -26,15 +26,19 @@ public class Main {
         input = new Scanner(System.in);
 
         // Loads previously saved game data automatically
-        GameData.loadGame(player);
+        player.loadSave();
 
         // Prints out a splash screen for new players
         System.out.println("Welcome to MetinFarm v" + GameData.version + "\n" +
                 "If you are new to the game type \"help\"");
+
+        // The main game loop
         while (isRunning) {
             System.out.print("> ");
             getCommand(input.nextLine());
         }
+
+        // Exit clauses
         System.out.println("Exiting your farm... \nGoodbye!");
         input.close();
     }
@@ -49,7 +53,7 @@ public class Main {
         if (command.equalsIgnoreCase("exit") || command.equalsIgnoreCase("quit"))
             isRunning = false;
         else if (command.equalsIgnoreCase("save"))
-            GameData.saveGame(player);
+            player.savePlayerData();
         else if (command.equalsIgnoreCase("help"))
             printHelp(GameData.helpText);
         else if (command.equalsIgnoreCase("crops"))
