@@ -1,21 +1,22 @@
 package main;
-
-import crops.Corn;
 import crops.Crop;
-import crops.Empty;
-import crops.Pumpkin;
 
 import java.lang.reflect.InvocationTargetException;
 
+import static main.GameData.plantNames;
+import static main.GameData.plantTypes;
+
 class Planting {
-    static String[] plantNames = {"corn", "pumpkin", "empty"};
-    static Class[] plantTypes = {Corn.class, Pumpkin.class, Empty.class};
+
     /**
      * Method that deals with the basis of planting crops
      * @param crop The type of crop to be planted
      * @param player The player information
      */
-    static void plant(String crop, PlayerData player, boolean cost) {
+    static boolean plant(String crop, PlayerData player, boolean cost) {
+        // Boolean that keeps track of whether the crop was planted or not
+        boolean plantSuccess = false;
+
         // Runs through a list of crops and compares them to the crop wanted
         for (int i = 0; i < plantNames.length; i++) {
             // Checks if the plant name and the crop wanting to be planted align
@@ -25,6 +26,7 @@ class Planting {
                     // Tries to plant the crop specified
                     try {
                         player.plots[player.selectedPlot] = (Crop) plantTypes[i].getDeclaredConstructor().newInstance();
+                        plantSuccess = true;
                     } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                         e.printStackTrace();
                     }
@@ -38,6 +40,7 @@ class Planting {
                     System.out.println("Not enough money");
             }
         }
+        return plantSuccess;
 
 //        else
 //            System.out.println("That is not a crop.\nType \"crops\" for a list of crops");

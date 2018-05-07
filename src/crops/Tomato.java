@@ -2,10 +2,10 @@ package crops;
 
 import main.GameData;
 
-public class Pumpkin extends Crop{
-    static int id = 6;
-    public Pumpkin() {
-        timeToGrow = GameData.growthTime[id]; //180
+public class Tomato extends Crop {
+    static int id = 3;
+    public Tomato() {
+        timeToGrow = GameData.growthTime[id]; //120
         finishTime = setFinishTime();
         cost = GameData.costs[id];
         profit = GameData.profits[id];

@@ -65,8 +65,8 @@ public class Main {
         else if (command.equalsIgnoreCase("plant"))
             needCrop();
         else if (command.contains("plant ")) {
-            plantStuff(command.substring(6));
-            player.plots[player.selectedPlot].printTimeLeft();
+            if (plantStuff(command.substring(6)))
+                player.plots[player.selectedPlot].printTimeLeft();
         }
         else if (command.contains("harvest"))
             plotStuff("harvest");
@@ -86,8 +86,8 @@ public class Main {
      * Handles stuff dealing with the planting command
      * @param crop The type of crop
      */
-    private static void plantStuff(String crop) {
-        plant(crop, player, true);
+    private static boolean plantStuff(String crop) {
+        return plant(crop, player, true);
     }
 
     private static void needCrop() {

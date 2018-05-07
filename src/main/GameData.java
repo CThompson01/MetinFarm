@@ -1,15 +1,56 @@
 package main;
 
+import crops.*;
+
 import java.io.*;
 import java.util.stream.Stream;
 
 public class GameData {
-    // Other game data
-    static final String version = "0.3.5";
+    // Other Game Data
+    static final String version = "0.4";
 
-    // Costs for crops
-    public static final double[] costs = {3.00, 7.50, 0.00};
-    public static double[] profits = {0.50, 1.50, 0.00};
+    // All Data For Crops
+    // The names that are associated with each crop
+    public static String[] plantNames = {
+            "wheat", //#0
+            "carrot", "carrots", //#1
+            "tomato", "tomatoes", "tomatos", //#3
+            "pumpkin", "pumpkins", //#6
+            "corn", //#8
+            "empty"};
+    // The classes for the crops
+    public static Class[] plantTypes = {
+            Wheat.class, //#0
+            Carrot.class, Carrot.class, //#1
+            Tomato.class, Tomato.class, Tomato.class, //#3
+            Pumpkin.class, Pumpkin.class, //#6
+            Corn.class, //#8
+            Empty.class};
+    // The cost for each crop
+    public static final double[] costs = {
+            3.00, //#0
+            7.50, 7.50, //#1
+            19.50, 19.50, 19.50, //#3
+            35.00, 35.00, //#6
+            50.75, //#8
+            0.00};
+    // The profits for each crop
+    public static double[] profits = {
+            0.50, //#0
+            1.50, 1.50, //#1
+            4.00, 4.00, 4.00, //#3
+            7.25, 7.25, //#6
+            10.50, //#8
+            0.00};
+    // The time for each of the crops to grow
+    public static int[] growthTime = {
+            30, //#0
+            60, 60, //#1
+            120, 120, 120, //#3
+            180, 180, //#6
+            240, //#8
+            0};
+
 
     // All Help Text
     public static String[] helpText = {
@@ -29,8 +70,11 @@ public class GameData {
             "plots              prints out all your plots and what crops are on each",
             "plots ready        prints out all your plots current timeleft till harvestability"};
     public static String[] listOfCrops = {
-            "Corn       Grow Time: 30s     Cost: $" + costs[0],
-            "Pumpkin    Grow Time: 60s     Cost: $" + costs[1]};
+            GameData.plantNames[0] + "    Grow Time: " + growthTime[0] + "s     Cost: $" + costs[0],
+            GameData.plantNames[1] + "    Grow Time: " + growthTime[1] + "s     Cost: $" + costs[1],
+            GameData.plantNames[3] + "    Grow Time: " + growthTime[3] + "s     Cost: $" + costs[3],
+            GameData.plantNames[6] + "    Grow Time: " + growthTime[6] + "s     Cost: $" + costs[6],
+            GameData.plantNames[8] + "    Grow Time: " + growthTime[8] + "s     Cost: $" + costs[8]};
 
     /**
      * Prints out the specified help menu
