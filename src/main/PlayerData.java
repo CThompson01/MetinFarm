@@ -24,16 +24,12 @@ class PlayerData {
             printWriter.println("money=" + this.money);
             for (int i = 0; i < this.plots.length; i++) {
                 printWriter.println("plot" + i + "=" + this.plots[i].typeOfCrop);
-                printWriter.println("timeLeft" + i + "=" + this.plots[i].timeLeft());
+                printWriter.println("timeLeft" + i + "=" + this.plots[i].finishTime);
             }
             printWriter.close();
             saveSuccess = true;
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
             e.printStackTrace();
-            saveSuccess = false;
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            saveSuccess = false;
         }
 
         if (!saveSuccess)

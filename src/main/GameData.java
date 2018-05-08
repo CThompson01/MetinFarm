@@ -2,12 +2,9 @@ package main;
 
 import crops.*;
 
-import java.io.*;
-import java.util.stream.Stream;
-
 public class GameData {
     // Other Game Data
-    static final String version = "0.4";
+    static final String version = "0.4.5";
 
     // All Data For Crops
     // The names that are associated with each crop
@@ -19,7 +16,7 @@ public class GameData {
             "corn", //#8
             "empty"};
     // The classes for the crops
-    public static Class[] plantTypes = {
+    static Class[] plantTypes = {
             Wheat.class, //#0
             Carrot.class, Carrot.class, //#1
             Tomato.class, Tomato.class, Tomato.class, //#3
@@ -53,15 +50,16 @@ public class GameData {
 
 
     // All Help Text
-    public static String[] helpText = {
+    static String[] helpText = {
             "To plant on a plot use the plant command once a plot is selected",
             "plant crop_name    plants the crop specified on the selected plot",
             "plot help          prints a list of commands dealing with plots",
             "harvest            harvests the crops on the selected plot",
+            "money              prints the current amount of money you have",
             "crops              prints a list of all the crops",
             "save               saves the game",
             "exit               exits the game"};
-    public static String[] plotHelp = {
+    static String[] plotHelp = {
             "plot plot_number   selects the specified plot",
             "plot selected      prints the plot that\'s selected",
             "plot type          prints the crop that\'s planted",
@@ -69,7 +67,7 @@ public class GameData {
             "plot harvest       harvests the crop that\'s planted",
             "plots              prints out all your plots and what crops are on each",
             "plots ready        prints out all your plots current timeleft till harvestability"};
-    public static String[] listOfCrops = {
+    static String[] listOfCrops = {
             GameData.plantNames[0] + "    Grow Time: " + growthTime[0] + "s     Cost: $" + costs[0],
             GameData.plantNames[1] + "    Grow Time: " + growthTime[1] + "s     Cost: $" + costs[1],
             GameData.plantNames[3] + "    Grow Time: " + growthTime[3] + "s     Cost: $" + costs[3],

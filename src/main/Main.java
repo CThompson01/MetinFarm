@@ -56,6 +56,8 @@ public class Main {
             player.savePlayerData();
         else if (command.equalsIgnoreCase("help"))
             printHelp(GameData.helpText);
+        else if (command.equalsIgnoreCase("reset") || command.equalsIgnoreCase("restart"))
+            System.out.println("Delete the save.txt file to reset your save!");
         else if (command.equalsIgnoreCase("crops"))
             printHelp(GameData.listOfCrops);
         else if (command.equalsIgnoreCase("money") || command.equalsIgnoreCase("balance"))
@@ -68,6 +70,8 @@ public class Main {
             if (plantStuff(command.substring(6)))
                 player.plots[player.selectedPlot].printTimeLeft();
         }
+        else if (command.equalsIgnoreCase("harvest all") || command.equalsIgnoreCase("harvestall"))
+            harvestAll();
         else if (command.contains("harvest"))
             plotStuff("harvest");
         else if (command.equalsIgnoreCase("plots ready"))
@@ -103,7 +107,7 @@ public class Main {
      */
     private static void plotStuff(String command) {
         if (command.equalsIgnoreCase("harvest")) {
-            harvest();
+            harvest(false);
         } else if (command.equalsIgnoreCase("time") || command.equalsIgnoreCase("time left"))
             player.plots[player.selectedPlot].printTimeLeft();
 
@@ -138,24 +142,31 @@ public class Main {
      * If the plant is ready to be harvested it harvests the plant
      * If the plant is not ready to be harvested tell remaining time
      */
-    private static void harvest() {
-        if (player.plots[player.selectedPlot].harvestSuccess()) {
-            double moneyMade = player.plots[player.selectedPlot].harvest();
-            player.plots[player.selectedPlot] = new Empty();
-            player.money += moneyMade;
-            System.out.println("Money Made: $" + moneyMade);
-            getCommand("balance");
-        } else {
-            player.plots[player.selectedPlot].harvestFail();
+    private static void harvest(boolean harvestAll) {
+        if (player.plots[player.selectedPlot].typeOfCrop.equalsIgnoreCase("Empty Plot") && !harvestAll)
+            System.out.println("Plot is empty. Please plant a crop first.\n" +
+                    "Type \"help\" if you don't know how to plant.");
+        else if (!player.plots[player.selectedPlot].typeOfCrop.equalsIgnoreCase("Empty Plot")) {
+            if (player.plots[player.selectedPlot].harvestSuccess() &&
+                    !player.plots[player.selectedPlot].typeOfCrop.equalsIgnoreCase("Empty Plot")) {
+                double moneyMade = player.plots[player.selectedPlot].harvest();
+                player.plots[player.selectedPlot] = new Empty();
+                player.money += moneyMade;
+                System.out.println("Money Made: $" + moneyMade);
+                getCommand("balance");
+            } else {
+                player.plots[player.selectedPlot].harvestFail();
+            }
         }
     }
 
     /**
-     * Prints out a graphic to show what crops are on which plot
+     * Harvests all harvestable plants
      */
-    private static void printPlots() {
-        for (Crop plot : player.plots) {
-            System.out.println( "#   " + plot.typeOfCrop + "   #");
+    private static void harvestAll() {
+        for (int i = 0; i < player.plots.length; i++) {
+            player.selectedPlot = i;
+            harvest(true);
         }
     }
 

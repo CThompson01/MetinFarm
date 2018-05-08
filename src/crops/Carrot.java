@@ -3,8 +3,8 @@ package crops;
 import main.GameData;
 
 public class Carrot extends Crop {
-    static int id = 1;
     public Carrot() {
+        int id = 1;
         timeToGrow = GameData.growthTime[id];
         finishTime = setFinishTime();
         cost = GameData.costs[id];

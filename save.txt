@@ -1,11 +1,11 @@
 money=5.0
 plot0=Empty Plot
-timeLeft0=0
+timeLeft0=1073752
 plot1=Empty Plot
-timeLeft1=0
+timeLeft1=1073752
 plot2=Empty Plot
-timeLeft2=0
+timeLeft2=1073752
 plot3=Empty Plot
-timeLeft3=0
+timeLeft3=1073752
 plot4=Empty Plot
-timeLeft4=0
+timeLeft4=1073752

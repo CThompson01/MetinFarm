@@ -2,11 +2,10 @@ package crops;
 
 public class Crop {
     int timeToGrow;
-    int finishTime;
+    public int finishTime;
     double cost;
     double profit;
     public String typeOfCrop;
-    public String cropType;
 
     /**
      * Harvests the current crop
@@ -62,5 +61,5 @@ public class Crop {
      * Sets the time left for a crop to grow on the load of the game
      * @param timeLeft The time left for the crop to grow once the game is loaded
      */
-    public void loadTime(int timeLeft) { timeToGrow = timeLeft; }
+    public void loadTime(int timeLeft) { finishTime = timeLeft; }
 }
