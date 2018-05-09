@@ -4,7 +4,8 @@ import crops.*;
 
 public class GameData {
     // Other Game Data
-    static final String version = "0.4.5";
+    static final String version = "1.0";
+    public static int difficulty = 1;
 
     // All Data For Crops
     // The names that are associated with each crop
@@ -68,11 +69,11 @@ public class GameData {
             "plots              prints out all your plots and what crops are on each",
             "plots ready        prints out all your plots current timeleft till harvestability"};
     static String[] listOfCrops = {
-            GameData.plantNames[0] + "    Grow Time: " + growthTime[0] + "s     Cost: $" + costs[0],
-            GameData.plantNames[1] + "    Grow Time: " + growthTime[1] + "s     Cost: $" + costs[1],
-            GameData.plantNames[3] + "    Grow Time: " + growthTime[3] + "s     Cost: $" + costs[3],
-            GameData.plantNames[6] + "    Grow Time: " + growthTime[6] + "s     Cost: $" + costs[6],
-            GameData.plantNames[8] + "    Grow Time: " + growthTime[8] + "s     Cost: $" + costs[8]};
+            GameData.plantNames[0] + "    Grow Time: " + (growthTime[0] * difficulty) + "s     Cost: $" + costs[0] + "0",
+            GameData.plantNames[1] + "    Grow Time: " + (growthTime[1] * difficulty) + "s     Cost: $" + costs[1] + "0",
+            GameData.plantNames[3] + "    Grow Time: " + (growthTime[3] * difficulty) + "s     Cost: $" + costs[3] + "0",
+            GameData.plantNames[6] + "    Grow Time: " + (growthTime[6] * difficulty) + "s     Cost: $" + costs[6] + "0",
+            GameData.plantNames[8] + "    Grow Time: " + (growthTime[8] * difficulty) + "s     Cost: $" + costs[8]};
 
     /**
      * Prints out the specified help menu
@@ -82,5 +83,23 @@ public class GameData {
         for (String aHelpText : helpText) {
             System.out.println(aHelpText);
         }
+    }
+
+    static void reloadCrops() {
+        listOfCrops[0] = GameData.plantNames[0] + "      Grow Time: " + convertToHours(growthTime[0] * difficulty) + "      Cost: $" + costs[0] + "0";
+        listOfCrops[1] = GameData.plantNames[1] + "     Grow Time: " + convertToHours(growthTime[1] * difficulty) + "      Cost: $" + costs[1] + "0";
+        listOfCrops[2] = GameData.plantNames[3] + "     Grow Time: " + convertToHours(growthTime[3] * difficulty) + "      Cost: $" + costs[3] + "0";
+        listOfCrops[3] = GameData.plantNames[6] + "    Grow Time: " + convertToHours(growthTime[6] * difficulty) + "      Cost: $" + costs[6] + "0";
+        listOfCrops[4] = GameData.plantNames[8] + "       Grow Time: " + convertToHours(growthTime[8] * difficulty) + "      Cost: $" + costs[8];
+    }
+
+    static String convertToHours(int seconds) {
+        int timeleft = seconds;
+        int minutesLeft = timeleft / 60;
+        int hoursLeft = minutesLeft / 60;
+        minutesLeft = minutesLeft % 60;
+        int secondsLeft = timeleft % 60;
+        return (hoursLeft + ":" + (minutesLeft < 10 ? "0" + minutesLeft : minutesLeft) + ":" + (secondsLeft < 10 ? "0" + secondsLeft : secondsLeft));
+
     }
 }

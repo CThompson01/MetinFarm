@@ -3,9 +3,11 @@ package main;
 import crops.Crop;
 import crops.Empty;
 
+import java.text.NumberFormat;
 import java.util.Scanner;
 
 import static main.GameData.printHelp;
+import static main.GameData.reloadCrops;
 import static main.Planting.plant;
 
 public class Main {
@@ -13,6 +15,7 @@ public class Main {
     // Variables needed for basic functionality
     private static boolean isRunning;
     private static Scanner input;
+    private static NumberFormat formatter;
 
     // Initializes the player
     private static PlayerData player = new PlayerData();
@@ -24,6 +27,7 @@ public class Main {
     public static void main(String[] args) {
         isRunning = true;
         input = new Scanner(System.in);
+        formatter = NumberFormat.getCurrencyInstance();
 
         // Loads previously saved game data automatically
         player.loadSave();
@@ -54,14 +58,18 @@ public class Main {
             isRunning = false;
         else if (command.equalsIgnoreCase("save"))
             player.savePlayerData();
+        else if (command.equalsIgnoreCase("difficulty"))
+            setDifficulty();
+        else if (command.contains("difficulty "))
+            setDifficulty(command);
         else if (command.equalsIgnoreCase("help"))
             printHelp(GameData.helpText);
         else if (command.equalsIgnoreCase("reset") || command.equalsIgnoreCase("restart"))
             System.out.println("Delete the save.txt file to reset your save!");
-        else if (command.equalsIgnoreCase("crops"))
-            printHelp(GameData.listOfCrops);
+        else if (command.equalsIgnoreCase("crops")){
+            reloadCrops(); printHelp(GameData.listOfCrops);}
         else if (command.equalsIgnoreCase("money") || command.equalsIgnoreCase("balance"))
-            System.out.println("Current Balance: $" + player.money);
+            System.out.println("Current Balance: " + formatter.format(player.money));
 
         // Contains farming based commands
         else if (command.equalsIgnoreCase("plant"))
@@ -152,7 +160,7 @@ public class Main {
                 double moneyMade = player.plots[player.selectedPlot].harvest();
                 player.plots[player.selectedPlot] = new Empty();
                 player.money += moneyMade;
-                System.out.println("Money Made: $" + moneyMade);
+                System.out.println("Money Made: " + formatter.format(moneyMade));
                 getCommand("balance");
             } else {
                 player.plots[player.selectedPlot].harvestFail();
@@ -183,7 +191,34 @@ public class Main {
             else if (plot.harvestSuccess())
                 System.out.println("#   Harvestable   #");
             else
-                System.out.println("#   Crop: " + plot.typeOfCrop + "  Time Left: " + plot.timeLeft() + "s   #");
+                System.out.println("#   Crop: " + plot.typeOfCrop + "  Time Left: " + plot.timeLeftFull() + "    #");
         }
+    }
+
+    private static void setDifficulty() {
+        int current = GameData.difficulty;
+        String currentDifficulty = (current == 60 ? "extreme" :
+                current == 6 ? "hard" : current == 2 ? "medium" : "easy");
+        System.out.println("Please select a difficulty!\n" +
+                "Current Difficulty: " + currentDifficulty + "\n" +
+                "Easy               Growth time is normal\n" +
+                "Medium             Growth time is multiplied by 2\n" +
+                "Hard               Growth time is multiplied by 6\n" +
+                "Extreme Farming    Growth time is multiplied by 60");
+        String difficulty = input.nextLine();
+        GameData.difficulty = (difficulty.contains("extreme") ? 60 :
+                difficulty.contains("hard") ? 6 :
+                difficulty.contains("medium") ? 2 :
+                difficulty.contains("easy") ? 1 : GameData.difficulty);
+        System.out.println("Difficulty set to " + difficulty + "(" + GameData.difficulty + ")");
+    }
+
+    private static void setDifficulty(String input) {
+        String difficulty = input.substring(11);
+        GameData.difficulty = (difficulty.contains("extreme") ? 60 :
+                difficulty.contains("hard") ? 6 :
+                difficulty.contains("medium") ? 2 :
+                difficulty.contains("easy") ? 1 : GameData.difficulty);
+        System.out.println("Difficulty set to " + difficulty + "(" + GameData.difficulty + ")");
     }
 }

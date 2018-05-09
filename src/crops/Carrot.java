@@ -6,7 +6,7 @@ public class Carrot extends Crop {
     public Carrot() {
         int id = 1;
         timeToGrow = GameData.growthTime[id];
-        finishTime = setFinishTime();
+        finishTime = setFinishTime(GameData.difficulty);
         cost = GameData.costs[id];
         profit = GameData.profits[id];
         typeOfCrop = GameData.plantNames[id];

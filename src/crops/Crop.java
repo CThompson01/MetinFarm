@@ -43,10 +43,18 @@ public class Crop {
     }
 
     /**
+     * Calculates the time at which the crop will finish growing
+     * @param multiplier The multiplying effect depending on the difficulty
+     * @return Returns an int holding the value of when the crop will be finished
+     */
+    int setFinishTime(int multiplier) { return (int)System.currentTimeMillis()/1000 + (timeToGrow * multiplier); }
+
+    /**
      * Prints the amount of time left for the plot
      */
     public void printTimeLeft() {
-        System.out.println("This plot of " + typeOfCrop + " will finish growing in: " + timeLeft() + " seconds");
+        System.out.println("This plot of " + typeOfCrop + " will finish growing in: " + timeLeftFull());
+
     }
 
     /**
@@ -55,6 +63,15 @@ public class Crop {
      */
     public int timeLeft() {
         return finishTime - (int)System.currentTimeMillis()/1000;
+    }
+
+    public String timeLeftFull() {
+        int timeleft = timeLeft();
+        int minutesLeft = timeleft / 60;
+        int hoursLeft = minutesLeft / 60;
+        minutesLeft = minutesLeft % 60;
+        int secondsLeft = timeleft % 60;
+        return (hoursLeft + ":" + (minutesLeft < 10 ? "0" + minutesLeft : minutesLeft) + ":" + (secondsLeft < 10 ? "0" + secondsLeft : secondsLeft));
     }
 
     /**

@@ -11,7 +11,7 @@ class PlayerData {
     int selectedPlot = 0;
 
     // Variables containing currency
-    double money = 5.00;
+    double money = 5.50;
 
     /**
      * Saves the current game state to a text document
@@ -22,6 +22,7 @@ class PlayerData {
         try {
             PrintWriter printWriter = new PrintWriter("save.txt", "UTF-8");
             printWriter.println("money=" + this.money);
+            printWriter.println("difficulty=" + GameData.difficulty);
             for (int i = 0; i < this.plots.length; i++) {
                 printWriter.println("plot" + i + "=" + this.plots[i].typeOfCrop);
                 printWriter.println("timeLeft" + i + "=" + this.plots[i].finishTime);
@@ -55,6 +56,9 @@ class PlayerData {
                 } else if (saves.toString().contains("timeLeft")) {
                     this.selectedPlot = Integer.parseInt(saves.toString().substring(8, 9));
                     this.plots[this.selectedPlot].loadTime(Integer.parseInt(saves.toString().substring(10)));
+                } else if (saves.toString().contains("difficulty=")){
+                    String diff = saves.toString().substring(11);
+                    GameData.difficulty = Integer.parseInt(diff);
                 }
                 else
                     System.out.println("Nice try hacker but that's not a proper save command");

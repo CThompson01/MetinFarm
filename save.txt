@@ -1,11 +1,12 @@
-money=5.0
+money=5.5
+difficulty=60
 plot0=Empty Plot
-timeLeft0=1073752
+timeLeft0=1170516
 plot1=Empty Plot
-timeLeft1=1073752
+timeLeft1=1160720
 plot2=Empty Plot
 timeLeft2=1073752
 plot3=Empty Plot
 timeLeft3=1073752
 plot4=Empty Plot
-timeLeft4=1073752
+timeLeft4=1119140

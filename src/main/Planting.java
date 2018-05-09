@@ -17,10 +17,16 @@ class Planting {
         // Boolean that keeps track of whether the crop was planted or not
         boolean plantSuccess = false;
 
+        // Boolean that keeps track of whether the player entered a real crop
+        boolean realCrop = false;
+
         // Runs through a list of crops and compares them to the crop wanted
         for (int i = 0; i < plantNames.length; i++) {
             // Checks if the plant name and the crop wanting to be planted align
             if (plantNames[i].equalsIgnoreCase(crop)) {
+                // Proves that the player entered an actual crop
+                realCrop = true;
+
                 // Checks if the player has enough money to plant the crop
                 if ((player.money >= GameData.costs[i] && cost) || !cost) {
                     // Tries to plant the crop specified
@@ -40,9 +46,11 @@ class Planting {
                     System.out.println("Not enough money");
             }
         }
+
+        if (!realCrop && cost)
+            System.out.println("That is not a crop.\nType \"crops\" for a list of crops");
+
         return plantSuccess;
 
-//        else
-//            System.out.println("That is not a crop.\nType \"crops\" for a list of crops");
     }
 }
