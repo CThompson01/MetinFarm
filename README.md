@@ -72,6 +72,17 @@ java -jar MetinFarm.jar
 
 
 ## Changelog
+* Version 0.4
+  - Added a harvest all command
+  - Added a splash screen when the game launches
+  - Added a save system that auto loads on startup
+  - Added various crops
+    - Wheat
+    - Carrots
+    - Tomatoes
+  - Balanced costs and profits for crops
+    - Corn now costs $50.75 and takes 4 minutes to grow
+    - Pumpkin now costs $35.00 and takes 3 minutes to grow
 * Version 0.2
   - Added a seperate command for harvesting
   - Added a view plots command
