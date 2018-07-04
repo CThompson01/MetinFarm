@@ -1,11 +1,29 @@
 package crops;
 
+import main.GameData;
+
 public class Crop {
-    int timeToGrow;
+    private int timeToGrow;
     public int finishTime;
-    double cost;
-    double profit;
+    private double cost;
+    private double profit;
     public String typeOfCrop;
+    
+    public Crop() {
+    	timeToGrow = 0;
+        finishTime = (int)System.currentTimeMillis()/1000;
+        cost = 0.0;
+        profit = 0.0;
+        typeOfCrop = "Empty Plot";
+    }
+    
+    public Crop(int id) {
+    	timeToGrow = GameData.growthTime[id];
+        finishTime = setFinishTime(GameData.difficulty);
+        cost = GameData.costs[id];
+        profit = GameData.profits[id];
+        typeOfCrop = GameData.plantNames[id];
+    }
 
     /**
      * Harvests the current crop

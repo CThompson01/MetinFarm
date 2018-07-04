@@ -8,6 +8,13 @@ public class GameData {
     public static int difficulty = 1;
 
     // All Data For Crops
+    // Crop IDs
+    public static final int ID_WHEAT = 0;
+    public static final int ID_CARROT = 1;
+    public static final int ID_TOMATO = 3;
+    public static final int ID_PUMPKIN = 6;
+    public static final int ID_CORN = 8;
+    
     // The names that are associated with each crop
     public static String[] plantNames = {
             "wheat", //#0
@@ -17,7 +24,7 @@ public class GameData {
             "corn", //#8
             "empty"};
     // The classes for the crops
-    static Class[] plantTypes = {
+    static Class<?>[] plantTypes = {
             Wheat.class, //#0
             Carrot.class, Carrot.class, //#1
             Tomato.class, Tomato.class, Tomato.class, //#3
@@ -69,11 +76,11 @@ public class GameData {
             "plots              prints out all your plots and what crops are on each",
             "plots ready        prints out all your plots current timeleft till harvestability"};
     static String[] listOfCrops = {
-            GameData.plantNames[0] + "    Grow Time: " + (growthTime[0] * difficulty) + "s     Cost: $" + costs[0] + "0",
-            GameData.plantNames[1] + "    Grow Time: " + (growthTime[1] * difficulty) + "s     Cost: $" + costs[1] + "0",
-            GameData.plantNames[3] + "    Grow Time: " + (growthTime[3] * difficulty) + "s     Cost: $" + costs[3] + "0",
-            GameData.plantNames[6] + "    Grow Time: " + (growthTime[6] * difficulty) + "s     Cost: $" + costs[6] + "0",
-            GameData.plantNames[8] + "    Grow Time: " + (growthTime[8] * difficulty) + "s     Cost: $" + costs[8]};
+            GameData.plantNames[ID_WHEAT] + "    Grow Time: " + (growthTime[ID_WHEAT] * difficulty) + "s     Cost: $" + costs[ID_WHEAT] + "0",
+            GameData.plantNames[ID_CARROT] + "    Grow Time: " + (growthTime[ID_CARROT] * difficulty) + "s     Cost: $" + costs[ID_CARROT] + "0",
+            GameData.plantNames[ID_TOMATO] + "    Grow Time: " + (growthTime[ID_TOMATO] * difficulty) + "s     Cost: $" + costs[ID_TOMATO] + "0",
+            GameData.plantNames[ID_PUMPKIN] + "    Grow Time: " + (growthTime[ID_PUMPKIN] * difficulty) + "s     Cost: $" + costs[ID_PUMPKIN] + "0",
+            GameData.plantNames[ID_CORN] + "    Grow Time: " + (growthTime[ID_CORN] * difficulty) + "s     Cost: $" + costs[ID_CORN]};
 
     /**
      * Prints out the specified help menu
@@ -86,11 +93,11 @@ public class GameData {
     }
 
     static void reloadCrops() {
-        listOfCrops[0] = GameData.plantNames[0] + "      Grow Time: " + convertToHours(growthTime[0] * difficulty) + "      Cost: $" + costs[0] + "0";
-        listOfCrops[1] = GameData.plantNames[1] + "     Grow Time: " + convertToHours(growthTime[1] * difficulty) + "      Cost: $" + costs[1] + "0";
-        listOfCrops[2] = GameData.plantNames[3] + "     Grow Time: " + convertToHours(growthTime[3] * difficulty) + "      Cost: $" + costs[3] + "0";
-        listOfCrops[3] = GameData.plantNames[6] + "    Grow Time: " + convertToHours(growthTime[6] * difficulty) + "      Cost: $" + costs[6] + "0";
-        listOfCrops[4] = GameData.plantNames[8] + "       Grow Time: " + convertToHours(growthTime[8] * difficulty) + "      Cost: $" + costs[8];
+        listOfCrops[0] = GameData.plantNames[ID_WHEAT] + "      Grow Time: " + convertToHours(growthTime[ID_WHEAT] * difficulty) + "      Cost: $" + costs[ID_WHEAT] + "0";
+        listOfCrops[1] = GameData.plantNames[ID_CARROT] + "     Grow Time: " + convertToHours(growthTime[ID_CARROT] * difficulty) + "      Cost: $" + costs[ID_CARROT] + "0";
+        listOfCrops[2] = GameData.plantNames[ID_TOMATO] + "     Grow Time: " + convertToHours(growthTime[ID_TOMATO] * difficulty) + "      Cost: $" + costs[ID_TOMATO] + "0";
+        listOfCrops[3] = GameData.plantNames[ID_PUMPKIN] + "    Grow Time: " + convertToHours(growthTime[ID_PUMPKIN] * difficulty) + "      Cost: $" + costs[ID_PUMPKIN] + "0";
+        listOfCrops[4] = GameData.plantNames[ID_CORN] + "       Grow Time: " + convertToHours(growthTime[ID_CORN] * difficulty) + "      Cost: $" + costs[ID_CORN];
     }
 
     static String convertToHours(int seconds) {

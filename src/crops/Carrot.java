@@ -4,11 +4,6 @@ import main.GameData;
 
 public class Carrot extends Crop {
     public Carrot() {
-        int id = 1;
-        timeToGrow = GameData.growthTime[id];
-        finishTime = setFinishTime(GameData.difficulty);
-        cost = GameData.costs[id];
-        profit = GameData.profits[id];
-        typeOfCrop = GameData.plantNames[id];
+    	super(GameData.ID_CARROT);
     }
 }
