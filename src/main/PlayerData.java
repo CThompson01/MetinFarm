@@ -12,6 +12,10 @@ class PlayerData {
     // Variables containing currency
     public double money = 5.50;
 
+    public boolean canAffordCrop(Crop crop) {
+    	return money >= crop.cost;
+    }
+    
     /**
      * Saves the current game state to a text document
      */
@@ -67,5 +71,7 @@ class PlayerData {
 			e.printStackTrace();
 			System.err.println("Couldn't close buffered reader during save");
 		}
+        
+        selectedPlot = 0; // Reset selected plot
     }
 }

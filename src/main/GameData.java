@@ -24,7 +24,7 @@ public class GameData {
             "corn", //#8
             "empty"};
     // The classes for the crops
-    static Class<?>[] plantTypes = {
+    public static Class<?>[] plantTypes = {
             Wheat.class, //#0
             Carrot.class, Carrot.class, //#1
             Tomato.class, Tomato.class, Tomato.class, //#3

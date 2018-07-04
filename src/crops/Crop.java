@@ -5,7 +5,7 @@ import main.GameData;
 public class Crop {
     private int timeToGrow;
     public int finishTime;
-    private double cost;
+    public double cost;
     private double profit;
     public String typeOfCrop;
     
@@ -23,6 +23,28 @@ public class Crop {
         cost = GameData.costs[id];
         profit = GameData.profits[id];
         typeOfCrop = GameData.plantNames[id];
+    }
+    
+    public static Crop fromName(String cropName) {
+    	try {
+			for (int i = 0; i < GameData.plantNames.length; i++) { 
+				if (GameData.plantNames[i].equalsIgnoreCase(cropName)) {
+					return (Crop) GameData.plantTypes[i].getDeclaredConstructor().newInstance();
+				}
+			}
+		} catch (ReflectiveOperationException e) {
+			e.printStackTrace();
+		}
+    	
+    	return null;
+    }
+    
+    /**
+     * Is this crop an empty placeholder?
+     * @return Whether this crop is an Empty crop
+     */
+    public boolean isEmpty() {
+    	return typeOfCrop.equalsIgnoreCase("Empty Plot");
     }
 
     /**

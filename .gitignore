@@ -23,5 +23,8 @@ hs_err_pid*
 /bin/
 
 
+# Project files
+save.txt
+
 # Mac Files
 ._*
