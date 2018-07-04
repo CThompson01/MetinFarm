@@ -30,7 +30,7 @@ public class GameData {
             Tomato.class, Tomato.class, Tomato.class, //#3
             Pumpkin.class, Pumpkin.class, //#6
             Corn.class, //#8
-            Empty.class};
+            Crop.class};
     // The cost for each crop
     public static final double[] costs = {
             3.00, //#0

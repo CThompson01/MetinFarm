@@ -1,7 +1,6 @@
 package main;
 
 import crops.Crop;
-import crops.Empty;
 
 import java.text.NumberFormat;
 import java.util.Scanner;
@@ -17,7 +16,7 @@ public class Game {
     private NumberFormat formatter;
 
     // Initializes the player
-    private static PlayerData player = new PlayerData();
+    private PlayerData player = new PlayerData();
 
     /**
      * Main method
@@ -41,16 +40,26 @@ public class Game {
                 "If you are new to the game type \"help\"");
     }
     
+    /**
+     * Main game loop
+     */
     public void loop() {
-    	// The main game loop
         while (isRunning) {
             System.out.print("> ");
-            getCommand(input.nextLine());
+            executeCommand(input.nextLine());
         }
 
         // Exit clauses
         System.out.println("Exiting your farm... \nGoodbye!");
         input.close();
+    }
+    
+    /**
+     * Get the player's currently selected crop
+     * @return the player's currently selected crop.
+     */
+    public Crop getSelectedCrop() {
+    	return player.plots[player.selectedPlot];
     }
 
     /**
@@ -58,7 +67,7 @@ public class Game {
      * Then evaluates the command and does the subsequent actions
      * @param command The command input by the user
      */
-    private void getCommand(String command) {
+    private void executeCommand(String command) {
         // Contains basic menu and help commands
         if (command.equalsIgnoreCase("exit") || command.equalsIgnoreCase("quit"))
             isRunning = false;
@@ -81,21 +90,21 @@ public class Game {
         else if (command.equalsIgnoreCase("plant"))
             needCrop();
         else if (command.contains("plant ")) {
-            if (plantStuff(command.substring(6)))
-                player.plots[player.selectedPlot].printTimeLeft();
+            if (plantCrop(command.substring(6)))
+                getSelectedCrop().printTimeLeft();
         }
         else if (command.equalsIgnoreCase("harvest all") || command.equalsIgnoreCase("harvestall"))
             harvestAll();
         else if (command.contains("harvest"))
-            plotStuff("harvest");
+            executePlotCommand("harvest");
         else if (command.equalsIgnoreCase("plots ready"))
-            printHarvestable();
+            printPlots();
         else if (command.contains("plot "))
-            plotStuff(command.substring(5));
+            executePlotCommand(command.substring(5));
         else if (command.contains("plots "))
-            plotStuff(command.substring(6));
+            executePlotCommand(command.substring(6));
         else if (command.equalsIgnoreCase("plots"))
-            printHarvestable();
+            printPlots();
         else
             System.out.println("That is not a command.\nTry typing \"help\" for a list of commands");
     }
@@ -104,7 +113,7 @@ public class Game {
      * Handles stuff dealing with the planting command
      * @param crop The type of crop
      */
-    private boolean plantStuff(String crop) {
+    private boolean plantCrop(String crop) {
         return plant(crop, player, true);
     }
 
@@ -112,18 +121,18 @@ public class Game {
         System.out.println("Please select a crop to plant");
         printHelp(GameData.listOfCrops);
         System.out.print("Crop > ");
-        plantStuff(input.nextLine());
+        plantCrop(input.nextLine());
     }
 
     /**
      * Handles stuff dealing with the plot commands
      * @param command The sub command for plots
      */
-    private void plotStuff(String command) {
+    private void executePlotCommand(String command) {
         if (command.equalsIgnoreCase("harvest")) {
             harvest(false);
         } else if (command.equalsIgnoreCase("time") || command.equalsIgnoreCase("time left"))
-            player.plots[player.selectedPlot].printTimeLeft();
+            getSelectedCrop().printTimeLeft();
 
         // Other plot commands
         else if (command.equalsIgnoreCase("help")) // Prints plot help
@@ -133,7 +142,7 @@ public class Game {
         else if (command.equalsIgnoreCase("planted") ||
                 command.equalsIgnoreCase("crop") ||
                 command.equalsIgnoreCase("type")) // Prints the type of crop
-            System.out.println(player.plots[player.selectedPlot].typeOfCrop);
+            System.out.println(getSelectedCrop().typeOfCrop);
         else { // Tries to select a plot
             try {
                 int oldPlot = player.selectedPlot;
@@ -145,10 +154,9 @@ public class Game {
                     player.selectedPlot = oldPlot;
                     System.out.println("Please select a real plot");
                 }
-            } catch(Throwable e) {
+            } catch (Throwable e) {
                 System.out.println("Please enter a real command");
             }
-
         }
     }
 
@@ -157,19 +165,18 @@ public class Game {
      * If the plant is not ready to be harvested tell remaining time
      */
     private void harvest(boolean harvestAll) {
-        if (player.plots[player.selectedPlot].typeOfCrop.equalsIgnoreCase("Empty Plot") && !harvestAll)
+        if (getSelectedCrop().typeOfCrop.equalsIgnoreCase("Empty Plot") && !harvestAll)
             System.out.println("Plot is empty. Please plant a crop first.\n" +
                     "Type \"help\" if you don't know how to plant.");
-        else if (!player.plots[player.selectedPlot].typeOfCrop.equalsIgnoreCase("Empty Plot")) {
-            if (player.plots[player.selectedPlot].harvestSuccess() &&
-                    !player.plots[player.selectedPlot].typeOfCrop.equalsIgnoreCase("Empty Plot")) {
-                double moneyMade = player.plots[player.selectedPlot].harvest();
-                player.plots[player.selectedPlot] = new Empty();
+        else if (!getSelectedCrop().typeOfCrop.equalsIgnoreCase("Empty Plot")) {
+            if (getSelectedCrop().canBeHarvested()) {
+                double moneyMade = getSelectedCrop().harvest();
+                player.plots[player.selectedPlot] = new Crop();
                 player.money += moneyMade;
                 System.out.println("Money Made: " + formatter.format(moneyMade));
-                getCommand("balance");
+                executeCommand("balance");
             } else {
-                player.plots[player.selectedPlot].harvestFail();
+                getSelectedCrop().printRemainingTime();
             }
         }
     }
@@ -185,16 +192,15 @@ public class Game {
     }
 
     /**
-     * Prints a graphical view to show which plots are harvestable
+     * Prints a graphical view of the plots
      */
-    private void printHarvestable() {
-        int i = 0;
-        for (Crop plot : player.plots) {
-            i++;
-            System.out.print("Plot " + i + ": ");
+    private void printPlots() {
+        for (int i = 0; i < player.plots.length; i++) {
+        	Crop plot = player.plots[i];
+            System.out.print("Plot " + (i+1) + ": ");
             if (plot.typeOfCrop.equalsIgnoreCase("Empty Plot"))
                 System.out.println("#   Empty Plot    #");
-            else if (plot.harvestSuccess())
+            else if (plot.canBeHarvested())
                 System.out.println("#   Harvestable   #");
             else
                 System.out.println("#   Crop: " + plot.typeOfCrop + "  Time Left: " + plot.timeLeftFull() + "    #");

@@ -1,24 +1,22 @@
 package main;
 
 import crops.Crop;
-import crops.Empty;
 
 import java.io.*;
 
 class PlayerData {
     // Variables containing plot information
-    Crop[] plots = {new Empty(), new Empty(), new Empty(), new Empty(), new Empty()};
-    int selectedPlot = 0;
+    public Crop[] plots = {new Crop(), new Crop(), new Crop(), new Crop(), new Crop()};
+    public int selectedPlot = 0;
 
     // Variables containing currency
-    double money = 5.50;
+    public double money = 5.50;
 
     /**
      * Saves the current game state to a text document
      */
-    void savePlayerData() {
+    public void savePlayerData() {
         System.out.println("Saving Game...");
-        boolean saveSuccess = false;
         try {
             PrintWriter printWriter = new PrintWriter("save.txt", "UTF-8");
             printWriter.println("money=" + this.money);
@@ -28,21 +26,17 @@ class PlayerData {
                 printWriter.println("timeLeft" + i + "=" + this.plots[i].finishTime);
             }
             printWriter.close();
-            saveSuccess = true;
+            System.out.println("Saving Successful!");
         } catch (FileNotFoundException | UnsupportedEncodingException e) {
             e.printStackTrace();
+            System.out.println("Saving failed...");
         }
-
-        if (!saveSuccess)
-            System.out.println("Saving Failed...");
-        else
-            System.out.println("Saving Successful");
     }
 
     /**
      * Loads the current game state from a text document
      */
-    void loadSave() {
+    public void loadSave() {
         try {
             FileReader fileReader = new FileReader("save.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -63,10 +57,15 @@ class PlayerData {
                 else
                     System.out.println("Nice try hacker but that's not a proper save command");
             }
+            
+            bufferedReader.close();
         } catch (FileNotFoundException e) {
             // Creates save data if the save file is not found
             System.out.println("Save data not found. Creating save data now...");
             savePlayerData();
-        }
+        } catch (IOException e) {
+			e.printStackTrace();
+			System.err.println("Couldn't close buffered reader during save");
+		}
     }
 }

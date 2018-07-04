@@ -38,7 +38,7 @@ public class Crop {
      * Determines whether a harvest is successful or not
      * @return IF the time in millis is greater than the finish time harvest is successful
      */
-    public boolean harvestSuccess() {
+    public boolean canBeHarvested() {
         return ((int)System.currentTimeMillis()/1000) >= finishTime;
     }
 
@@ -48,7 +48,7 @@ public class Crop {
      * to be waited before the crop can
      * be successfully harvested
      */
-    public void harvestFail() {
+    public void printRemainingTime() {
         System.out.println("Wait " + (finishTime - ((int)System.currentTimeMillis()/1000)) + " more seconds before harvesting.");
     }
 
