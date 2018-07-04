@@ -10,12 +10,11 @@ import static main.GameData.printHelp;
 import static main.GameData.reloadCrops;
 import static main.Planting.plant;
 
-public class Main {
-
+public class Game {
     // Variables needed for basic functionality
-    private static boolean isRunning;
-    private static Scanner input;
-    private static NumberFormat formatter;
+    private boolean isRunning;
+    private Scanner input;
+    private NumberFormat formatter;
 
     // Initializes the player
     private static PlayerData player = new PlayerData();
@@ -25,7 +24,12 @@ public class Main {
      * Continues running until the user types quit or exit
      */
     public static void main(String[] args) {
-        isRunning = true;
+        Game metinFarm = new Game();
+        metinFarm.loop();
+    }
+    
+    private Game() {
+    	isRunning = true;
         input = new Scanner(System.in);
         formatter = NumberFormat.getCurrencyInstance();
 
@@ -35,8 +39,10 @@ public class Main {
         // Prints out a splash screen for new players
         System.out.println("Welcome to MetinFarm v" + GameData.version + "\n" +
                 "If you are new to the game type \"help\"");
-
-        // The main game loop
+    }
+    
+    public void loop() {
+    	// The main game loop
         while (isRunning) {
             System.out.print("> ");
             getCommand(input.nextLine());
@@ -52,7 +58,7 @@ public class Main {
      * Then evaluates the command and does the subsequent actions
      * @param command The command input by the user
      */
-    private static void getCommand(String command) {
+    private void getCommand(String command) {
         // Contains basic menu and help commands
         if (command.equalsIgnoreCase("exit") || command.equalsIgnoreCase("quit"))
             isRunning = false;
@@ -98,11 +104,11 @@ public class Main {
      * Handles stuff dealing with the planting command
      * @param crop The type of crop
      */
-    private static boolean plantStuff(String crop) {
+    private boolean plantStuff(String crop) {
         return plant(crop, player, true);
     }
 
-    private static void needCrop() {
+    private void needCrop() {
         System.out.println("Please select a crop to plant");
         printHelp(GameData.listOfCrops);
         System.out.print("Crop > ");
@@ -113,7 +119,7 @@ public class Main {
      * Handles stuff dealing with the plot commands
      * @param command The sub command for plots
      */
-    private static void plotStuff(String command) {
+    private void plotStuff(String command) {
         if (command.equalsIgnoreCase("harvest")) {
             harvest(false);
         } else if (command.equalsIgnoreCase("time") || command.equalsIgnoreCase("time left"))
@@ -150,7 +156,7 @@ public class Main {
      * If the plant is ready to be harvested it harvests the plant
      * If the plant is not ready to be harvested tell remaining time
      */
-    private static void harvest(boolean harvestAll) {
+    private void harvest(boolean harvestAll) {
         if (player.plots[player.selectedPlot].typeOfCrop.equalsIgnoreCase("Empty Plot") && !harvestAll)
             System.out.println("Plot is empty. Please plant a crop first.\n" +
                     "Type \"help\" if you don't know how to plant.");
@@ -171,7 +177,7 @@ public class Main {
     /**
      * Harvests all harvestable plants
      */
-    private static void harvestAll() {
+    private void harvestAll() {
         for (int i = 0; i < player.plots.length; i++) {
             player.selectedPlot = i;
             harvest(true);
@@ -181,7 +187,7 @@ public class Main {
     /**
      * Prints a graphical view to show which plots are harvestable
      */
-    private static void printHarvestable() {
+    private void printHarvestable() {
         int i = 0;
         for (Crop plot : player.plots) {
             i++;
@@ -195,7 +201,7 @@ public class Main {
         }
     }
 
-    private static void setDifficulty() {
+    private void setDifficulty() {
         int current = GameData.difficulty;
         String currentDifficulty = (current == 60 ? "extreme" :
                 current == 6 ? "hard" : current == 2 ? "medium" : "easy");
@@ -213,7 +219,7 @@ public class Main {
         System.out.println("Difficulty set to " + difficulty + "(" + GameData.difficulty + ")");
     }
 
-    private static void setDifficulty(String input) {
+    private void setDifficulty(String input) {
         String difficulty = input.substring(11);
         GameData.difficulty = (difficulty.contains("extreme") ? 60 :
                 difficulty.contains("hard") ? 6 :
